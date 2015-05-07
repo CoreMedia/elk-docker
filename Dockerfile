@@ -5,7 +5,7 @@
 # docker build . -t <repo-user>/elk
 
 # Run with:
-# docker run -p 5601:5601 -p 9200:9200 -p 5000:5000 -it --name elk <repo-user>/elk
+# docker run -p 5601:5601 -p 9200:9200 -p 5000:5000 -p 5001:5001 -it --name elk <repo-user>/elk
 
 FROM phusion/baseimage
 MAINTAINER Sebastien Pujadas http://pujadas.net
@@ -67,6 +67,7 @@ ADD ./logstash-forwarder.key /etc/pki/tls/private/logstash-forwarder.key
 
 # filters
 ADD ./01-lumberjack-input.conf /etc/logstash/conf.d/01-lumberjack-input.conf
+ADD ./02-tcp-json.conf /etc/logstash/conf.d/01-tcp-json.conf
 ADD ./10-syslog.conf /etc/logstash/conf.d/10-syslog.conf
 ADD ./11-nginx.conf /etc/logstash/conf.d/11-nginx.conf
 ADD ./30-lumberjack-output.conf /etc/logstash/conf.d/30-lumberjack-output.conf
@@ -83,6 +84,6 @@ RUN chown logstash:logstash /opt/logstash/patterns/*
 ADD ./start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
 
-EXPOSE 5601 9200 5000
+EXPOSE 5601 9200 5000 5001
 
 CMD [ "/usr/local/bin/start.sh" ]
