@@ -93,6 +93,7 @@ If you're using [Docker Compose](https://docs.docker.com/compose/) to manage you
 	elk:
 	  image: sebp/elk
 	  ports:
+	    - "514:514"
 	    - "5601:5601"
 	    - "9200:9200"
 	    - "5044:5044"

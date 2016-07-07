@@ -110,10 +110,10 @@ ADD ./logstash-beats.key /etc/pki/tls/private/logstash-beats.key
 
 # filters
 ADD ./01-lumberjack-input.conf /etc/logstash/conf.d/01-lumberjack-input.conf
-ADD ./02-tcp-json.conf /etc/logstash/conf.d/02-tcp-json.conf
 ADD ./02-beats-input.conf /etc/logstash/conf.d/02-beats-input.conf
 ADD ./10-syslog.conf /etc/logstash/conf.d/10-syslog.conf
 ADD ./11-nginx.conf /etc/logstash/conf.d/11-nginx.conf
+ADD ./20-logback-json.conf /etc/logstash/conf.d/20-logback-json.conf
 ADD ./30-output.conf /etc/logstash/conf.d/30-output.conf
 
 # patterns
@@ -138,7 +138,7 @@ RUN chmod 644 /etc/logrotate.d/elasticsearch \
 ADD ./start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
 
-EXPOSE 5601 9200 9300 5000 5044 5001
+EXPOSE 5601 9200 9300 5000 5044 5001 514
 VOLUME /var/lib/elasticsearch
 
 CMD [ "/usr/local/bin/start.sh" ]
