@@ -8,8 +8,14 @@
 
 elk:
   build: .
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - ~/logstash-index:/var/lib/elasticsearch
+  container_name: elkdocker_elk
+  restart: always
+  hostname: elk
   ports:
-    - "514:514"
+    - "514/udp:514/udp"
     - "5601:5601"
     - "9200:9200"
     - "9300:9300"
