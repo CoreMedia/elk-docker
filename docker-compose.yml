@@ -15,7 +15,7 @@ elk:
   restart: always
   hostname: elk
   ports:
-    - "514/udp:514/udp"
+    - "5002/udp:5002/udp"
     - "5601:5601"
     - "9200:9200"
     - "9300:9300"
